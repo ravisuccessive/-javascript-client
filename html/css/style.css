@@ -1,209 +1,221 @@
-body, html{
+body, html {
     background-image: url('../images/background.jpg');
     border: transparent solid 1px;
 }
-
 .container {
-    display: flex;
-    flex-direction: column;
-    background-color:grey;
-    padding: 1px;
-    margin: 10%;
-    box-shadow: 10px 5px 5px gray;
-}
-
-.block1 {
-    flex: 1;
-    border: 1px;
-    margin: 1px;
-    display: flex;
-    line-height: 43px;
-    background-color:white;
-    justify-content: space-between;
-}
-
-.block2 {
-    flex: 1;
-    display: flex;
-    padding: 1px;
-    margin: 1px;
+    border: 0.1px solid rgb(214, 212, 212);
+    margin: 50px;
+    box-shadow: 5px 10px 18px rgb(214, 212, 212);
     background-color: white;
-}
+    margin-top: 5%;
+    }
 
-ul.breadcrumb li+li:before {
-    padding: 8px;
-    color: black;
-    content: "/\00a0";
-}
-
-.checkout {
-    flex: 1;
+.first-flex-container {
+    border: 0.1px solid #dcd6d6;
     display: flex;
-    margin: 1px;
-    margin-right: 0.2%;
-    justify-content: space-between;
-}
-
-.checkout1 {
-    display: inline;
-    flex:5;
-}
-
-.breadcrumb {
-    display:flex;
-}
-
-.paymentblock {
-    display: flex;
-    flex: 6;
-    width: 20%;
-    flex-direction: column;
-    background-color:white;
-}
-
-.cartblock {
-    display: flex;
-    flex: 6;
-    width: 50%;
-    background-color: #EFF1F0;flex: 4;
-    
-}
-
-.icon {
-    display: flex;
-    flex: 0;
-    margin: 2px;
-}
-
-.image {
+    margin: auto;
+    width: 100%;
+    height: 6%;
+    flex-wrap: nowwrap;
     flex-direction: row;
-    display: flex;
-}
+    }
 
-.co_image {
+.second-flex-container {
+    display: flex;
     flex: 1;
-    flex-direction: row ;
+    border: 1px solid #dcd6d6;
+    background-color: white;
+        }
+
+.flex-item {
+    padding-left: 10px;
+    text-align: left;
+    line-height: 33px;
+    font-size: 18px;
+    }
+
+.item1 {
+    flex-grow: 3;
+    font-family: "Times New Roman", Times, serif;
+    color: rgb(66, 64, 64);
+    }
+   
+.item2 {
+    flex-grow: 20;
+    padding-left: 10px;
+    text-align: left;
+    line-height: 33px;
+    font-size: 10px;
+    font-family: "Arial";
+    color: rgb(97, 92, 92);
+        }
+        
+.close {
+    padding: 10px;    
+       }
+        
+.payment {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    }
+
+.wallet {
+    color: gray;
+    padding-top: 3%;
+    flex: 12;
+    flex-grow: 12;
+    }
+    
+.image {
+    display: flex;
+    flex-direction: row;
+
+    }
+    
+.co_image {
+    flex: 0.4;
+    display: flex;
+    flex-direction: column;
     padding: 1%;
     color: black;
     font-size: small;
-}
+    justify-content: space-around;
+    }
+
 .co_img {
-    width: 100%;
-    padding: 0%;
-    margin: auto;
+    width: 70%;
+    padding: 2%;
+    }
+
+.glow{
+    -moz-box-shadow: 0 0 5px rgb(148, 143, 143);
+    -webkit-box-shadow: 0 0 5px rgb(167, 164, 164);
+    box-shadow: 0 0 5px rgb(22, 22, 22);
+    }
+
+.newcard {
+    color: gray;
+    padding-top: 2%;
+    flex: 2;
+    }
+    
+#name,
+#acc {
+    border-radius: 3px;
+    border: 1px solid grey;
+    margin-left: 20%;
+    padding-bottom: 50;
+    padding: 1%;
+    width: 50%;
+}
+#exp {
+    border-radius: 3px;
+    border: 1px solid grey;
+    margin-left: 20%;
+    padding: 1%;
+    width: 24.5%
 }
 
+#cvv {
+    border-radius: 3px;
+    border: 1px solid grey;
+    padding: 1%;
+    width: 24.5%
+}
 
+.button {
+    background-color: #4CAF50;
+    width: 50%;
+    color: white;
+    border: none;
+    margin-left: 20%;
+    padding: 2%;
+    text-align: center;
+}
+    
+.item4 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    background-color: #eaeaea;
+    }
+
+
+
+.background {    
+    background-color: rgb(224, 224, 224);
+    }
+
+    /* Display list of items side by side */
+    
+ul.breadcrumb li {
+    font-family: "Times New Roman", Times, serif;
+    display: inline;
+    font-size: 15px;
+    }
+    
+    /* Add a slash symbol (/) before each list item */
+    
+ul.breadcrumb li+li:before {    
+    padding: 3px;
+    color: black;
+    content: "/\00a0";
+    }
+    
+.item_image {
+    border: 5px solid gray;
+    width: 65px;
+    height: 65px;
+    }
+   
 .co_image:hover {
     border-radius: 1px;
     border: 2px solid #e4e4e4;
     background-color: #e4e4e4;
+    }
+
+.amt {
+    margin-left: 1%;
+    flex: 6;
+    text-align: left;
+    font-size: medium;
 }
 
-.n_card {
-    color: gray;
-    padding-top: 2%;
-    flex: 2;
+.price {
+    text-align: right;
+    flex: 0.5;
+    font-size: 15px;
 }
 
-.wallet {
-    color: gray;
-    padding-top: 2%;
-    flex: 2;
-}
-
-.first {
-    margin-left: 2%;
-    margin-top: 2%;
-    flex: auto;
-}
-
-div.amt {
-    text-align: justify;
-}
-
-.co_item {
+.buy {
+    margin-left: 1%;
     flex: 1;
+    text-align: left;
+    font-size: 14px;
 }
 
 .item {
     display: flex;
     flex-direction: row;
     flex: 2;
-    
-}
-
-.item_image {
-    border: 5px solid #B2B7B3;
-    padding: 3%;
-    width: 40px;
-    height: 40px;
-}
-
-.amt {
-    flex: 6;
-    margin-left: 1%;
-    font-size: medium;
-}
-
-.buy {
-    margin-left: 1%;
-    flex: 1;
-    color: grey;
-    text-align: left;
-    font-size: 14px;
-}
-
-.price {
-    flex: 1;
-    font-size: 15px;
-    text-align: right;
-    color: grey;
-}
-
-#name,
-#acc {
-    margin-left: 20%;
-    width: 61%;
-    padding: 3%;
-   
-}
-
-#exp {
-    margin-left: 20%;
-    width: 29%;
-    padding: 3%;
-    
-}
-
-#cvv {
-    
-    width: 29%;
-    padding: 3%;
-    margin-left: 2%;
-}
-
-.button {
-    color:white;
-    width: 61%;
-    background-color: #08F763 ;
-    margin-left: 20%;
-    padding: 3%;
-}
-
-summary.buy {
-    margin-left: 1%;
-    flex: 1;
-    text-align: left;
-    font-size: 14px;   
 }
 
 .second {
-    padding-top: 8%;
-    flex: 1;
+    padding-top: 23%;
+    flex: 10;
 }
 
 .summary {
     display: flex;
     flex-direction: row;
+    font-size: 12px;
 }
+
+.price {
+    text-align: right;
+    flex: 1;
+    font-size: 12px;
+} 
