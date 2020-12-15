@@ -4,7 +4,7 @@ import { TextField } from '../../components';
 
 import { Slider } from '../../components/Slider';
 
-import { banners } from '../../configs/constants';
+import { banners } from '../../config/constants';
 
 import { Div } from '../../components/TextField/style';
 
