@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 
 import { Error, Input } from './style';
 
-const TextField = (props) => {
+export const TextField = (props) => {
   const { value, disabled, error } = props;
   if (error) {
     return (
       <>
-        <Input type="text" value={value} error />
+        <Input type="text" value={value} error  />
         <Error>{error}</Error>
       </>
     );
@@ -18,7 +18,7 @@ const TextField = (props) => {
     <Input type="text" value={value} disabled={disabled} />
   );
 };
-export default TextField;
+
 TextField.propTypes = {
   value: PropTypes.string,
   disabled: PropTypes.string,
