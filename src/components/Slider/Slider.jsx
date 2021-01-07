@@ -8,7 +8,7 @@ class Slider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: -1,
+      current: -0,
 
     };
   }
@@ -17,11 +17,8 @@ class Slider extends Component {
     const { random, duration } = this.props;
     let { current } = this.state;
     this.id = setInterval(() => {
-      if (random) {
-        current = getRandomNumber(total);
-      } else {
-        current = getNextRoundRobin(current, total);
-      }
+    (random) ? current = getRandomNumber(total) : current = getNextRoundRobin(current, total)
+      
       this.setState({ current });
     }, duration);
   }
@@ -36,13 +33,11 @@ class Slider extends Component {
       altText, height, duration, banner,
     } = this.props;
     const { defaultbanner } = this.props;
-    if (current === -1 || banner.length === 0) {
+    if (banner.length === 0) {
       return (
-        <>
-          <div align="center">
-            <Img src={`${PUBLIC_IMAGE_FOLDER}${defaultbanner}`} alt={altText} height={height} duration={duration} />
-          </div>
-        </>
+        <div align="center"><Img src={`${PUBLIC_IMAGE_FOLDER}${defaultbanner}`} alt={altText} height={height} duration={duration} />
+        </div>
+    
       );
     }
     return (
