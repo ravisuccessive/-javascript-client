@@ -19,20 +19,20 @@ const passwordStyle = () => ({
 });
 
 const constant = {
-  Name: Person,
-  'Email Id': Email,
-  Password: VisibilityOff,
-  'Confirm Password': VisibilityOff,
+  name: Person,
+  email: Email,
+  password: VisibilityOff,
+  confirmPassword: VisibilityOff,
 };
 
 class AddDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Name: '',
-      Email: '',
-      Password: '',
-      ConfirmPassword: '',
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
       touched: {
         name: false,
         email: false,
@@ -46,18 +46,18 @@ class AddDialog extends React.Component {
     this.setState({ [key]: value });
   };
 
-  hasError = () => {
+  hasErrors = () => {
     try {
       schema.validateSync(this.state);
     } catch (err) {
       return true;
     }
     return false;
-  }
+  };
 
   getError = (field) => {
     const { touched } = this.state;
-    if (touched[field] && this.hasError()) {
+    if (touched[field] && this.hasErrors()) {
       try {
         schema.validateSyncAt(field, this.state);
         return '';
@@ -66,7 +66,7 @@ class AddDialog extends React.Component {
       }
     }
     return '';
-  }
+  };
 
   isTouched = (field) => {
     const { touched } = this.state;
@@ -76,13 +76,6 @@ class AddDialog extends React.Component {
         [field]: true,
       },
     });
-  }
-
-  passwordType = (key) => {
-    if (key === 'Password' || key === 'Confirm Password') {
-      return 'password';
-    }
-    return '';
   }
 
   render() {
@@ -100,13 +93,13 @@ class AddDialog extends React.Component {
         helperText={this.getError(key)}
         error={!!this.getError(key)}
         icons={constant[key]}
-        type={this.passwordType(key)}
+        type={(key === 'password' || key === 'confirmPassword') ? 'password' : ''}
       />);
     });
     return (
       <>
         <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
-          <DialogTitle> Add Trainee </DialogTitle>
+          <DialogTitle id="form-dialog-title"> Add Trainee </DialogTitle>
           <DialogContent>
             <DialogContentText>
               Enter your trainee Details
@@ -131,7 +124,7 @@ class AddDialog extends React.Component {
               &nbsp;
             <div align="right">
               <Button onClick={onClose} color="primary"> CANCEL</Button>
-              <Button color="primary" disabled={this.hasError} onClick={() => onSubmit({ name, email, password })}>SUBMIT</Button>
+              <Button color="primary" disabled={this.hasErrors()} onClick={() => onSubmit({ name, email, password })}>SUBMIT</Button>
             </div>
           </DialogContent>
         </Dialog>
