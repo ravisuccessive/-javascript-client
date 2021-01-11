@@ -1,20 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as moment from 'moment';
 import { Button, withStyles } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { AddDialog, EditDialog, DeleteDialog } from './components/index';
 import { TableComponent } from '../../components';
-import trainee from './Data/Trainee';
+import { trainees } from './Data/Trainee';
 
-const useStyles = (theme) => ({
-    root: {
-      margin: theme.spacing(2),
-    },
-    dialog: {
-      textAlign: 'right',
-    },
-  });
+function useStyles(theme) {
+    return ({
+        root: {
+            margin: theme.spacing(2),
+        },
+        dialog: {
+            textAlign: 'right',
+        },
+    });
+}
   
   class TraineeList extends React.Component {
     constructor(props) {
@@ -42,12 +45,15 @@ const useStyles = (theme) => ({
       return open;
     };
   
-    handleSubmit = (data) => {
+    handleSubmit = (data, value) => {
       this.setState({
         open: false,
       }, () => {
         console.log(data);
       });
+      const message = 'This is Success Message';
+      const status = 'success';
+      value(message, status);
     }
   
     handleSelect = (event) => {
@@ -83,13 +89,20 @@ const useStyles = (theme) => ({
       });
     };
   
-    handleRemove = () => {
+    handleRemove = (value) => {
       const { deleteData } = this.state;
       this.setState({
         RemoveOpen: false,
       });
       // eslint-disable-next-line no-console
       console.log('Deleted Item ', deleteData);
+      const { createdAt } = deleteData;
+      const isAfter = moment(createdAt).isSameOrAfter('2019-02-14T18:15:11.778Z');
+      const message = isAfter
+        ? 'This is a success message!'
+        : 'This is an error message!';
+      const status = isAfter ? 'success' : 'error';
+      value(message, status);
     };
   
     // eslint-disable-next-line no-unused-vars
@@ -106,12 +119,24 @@ const useStyles = (theme) => ({
       });
     };
   
-    handleEdit = (name, email) => {
+    handleEdit = (name, email, value) => {
       this.setState({
         EditOpen: false,
       });
       // eslint-disable-next-line no-console
       console.log('Edited Item ', { name, email });
+      const message = 'This is a success message';
+      const status = 'success';
+      value(message, status);
+    };
+  
+    handlesnackbarClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      this.setState({
+        // snackbarOpen: false,
+      });
     };
   
     render() {
@@ -146,7 +171,7 @@ const useStyles = (theme) => ({
             <br />
             <TableComponent
               id="id"
-              data={trainee}
+              data={trainees}
               column={
                 [
                   {
