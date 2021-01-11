@@ -1,11 +1,15 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
   TextField, Typography, CardContent, InputAdornment, Button, Avatar, Card, CssBaseline, withStyles,
+  CircularProgress,
 } from '@material-ui/core';
-import { LockOutlined } from '@material-ui/icons';
-import { schema } from '../../configs/constants'
-import { Email, VisibilityOff } from '@material-ui/icons';
+import { Redirect } from 'react-router-dom';
+import { Email, VisibilityOff, LockOutlined } from '@material-ui/icons';
+import { schema } from '../../configs/constants';
+import callApi from '../../libs/utils/api';
+import { snackbarContext } from '../../contexts/SnackBarProvider';
 
 const Design = (theme) => ({
   icon: {
@@ -18,12 +22,15 @@ const Design = (theme) => ({
     marginTop: theme.spacing(25),
     marginLeft: theme.spacing(50),
   },
-})
+});
 
 class Login extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
+      loader: false,
+      disabled: true,
+      redirect: false,
       email: '',
       password: '',
       touched: {
@@ -32,6 +39,13 @@ class Login extends React.Component {
       },
     };
   }
+
+  renderRedirect = () => {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/trainee" />;
+    }
+  };
 
   handleChange = (key) => ({ target: { value } }) => {
     this.setState({ [key]: value });
@@ -68,12 +82,50 @@ class Login extends React.Component {
       });
     }
 
-  render() {
-    const { classes } = this.props;
-    return (
-      <>
-        <div className={classes.main}><CssBaseline /><Card open aria-labelledby="form-dialog-title"><Avatar className={classes.icon}><LockOutlined />
-        </Avatar><Typography variant="h3" align="center">Login</Typography><CardContent><form><div><TextField
+    onClickHandler = async (value) => {
+      const { email, password } = this.state;
+      await this.setState({
+        disabled: true,
+        loader: true,
+      });
+      const resp = await callApi('post', '/user/login/', { email: email.trim(), password });
+      console.log('resp', resp);
+      if (resp.data.data && (resp.data.status === 200)) {
+        window.localStorage.setItem('token', resp.data.data);
+        this.setState({
+          redirect: true,
+          message: 'Successfully Login',
+        }, () => {
+          const { message } = this.state;
+          value(message, 'success');
+        });
+      } else {
+        this.setState({
+          message: 'Email not Registered',
+        }, () => {
+          const { message } = this.state;
+          value(message, 'error');
+        });
+      }
+    };
+
+    render() {
+      const { classes } = this.props;
+      const { loader } = this.state;
+
+      return (
+        <>
+          <div className={classes.main}>
+            <CssBaseline />
+            <Card open aria-labelledby="form-dialog-title">
+              <Avatar className={classes.icon}>
+                <LockOutlined />
+              </Avatar>
+              <Typography variant="h3" align="center">Login</Typography>
+              <CardContent>
+                <form>
+                  <div>
+                    <TextField
                       helperText={this.getError('email')}
                       error={!!this.getError('email')}
                       required
@@ -91,7 +143,11 @@ class Login extends React.Component {
                           </InputAdornment>
                         ),
                       }}
-                    /></div>&nbsp;<div><TextField
+                    />
+                  </div>
+                  <br />
+                  <div>
+                    <TextField
                       type="password"
                       helperText={this.getError('password')}
                       error={!!this.getError('password')}
@@ -109,7 +165,25 @@ class Login extends React.Component {
                           </InputAdornment>
                         ),
                       }}
-                    /></div>&nbsp; <div><Button variant="contained" color="primary" disabled={this.hasErrors()} fullWidth>SIGN IN</Button></div></form> </CardContent> </Card></div></>
+                    />
+                  </div>
+              &nbsp;
+                  <div>
+                    <snackbarContext.Consumer>
+                      {(value) => (
+                        <Button variant="contained" color="primary" onClick={() => this.onClickHandler(value)} disabled={this.hasErrors()} fullWidth>
+                          {this.renderRedirect()}
+                          <span>{loader ? <CircularProgress size={20} /> : ''}</span>
+                          SIGN IN
+                        </Button>
+                      )}
+                    </snackbarContext.Consumer>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </>
       );
     }
 }
