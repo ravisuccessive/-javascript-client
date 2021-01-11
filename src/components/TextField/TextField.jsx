@@ -7,7 +7,8 @@ import { Error, Input } from './style';
 export const TextField = (props) => {
     const { value, disabled, error } = props;
     return (
-      <><Input type="text" value={value} disabled={disabled} />{
+      <>
+        <Input type="text" value={value} disabled={disabled} />{
             (error) ? <Error>{error}</Error> : ''
         }
       </>
