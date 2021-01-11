@@ -14,9 +14,9 @@ class Slider extends Component {
     }
 
     componentDidMount = () => {
-        const { random, duration } = this.props;
+        const { random, duration, banner } = this.props;
         this.id = setInterval(() => {
-            const currentIndex = random ? getRandomNumber(this.props.banner.length) : getNextRoundRobin(currentIndex, total)
+            const currentIndex = random ? getRandomNumber(banner.length) : getNextRoundRobin(currentIndex, total)
             this.setState({ current: currentIndex });
         }, duration);
     }
