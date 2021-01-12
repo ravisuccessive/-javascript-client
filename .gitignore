@@ -2,9 +2,13 @@
 
 # dependencies
 /node_modules
-/.pnp
+.pnp
 .pnp.js
-/.vscode
+.vscode
+package-lock.json
+react-app-env.d.ts
+.eslintcache
+
 # testing
 /coverage
 

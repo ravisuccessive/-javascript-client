@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextField, SelectField, RadioField } from '../../components';
-import { selectOptions, radioOptionsCricket, radioOptionsFootball } from '../../configs/constants';
+import { selectOptions, radioOptionsCricket, radioOptionsFootball } from '../../configs/constants'
 
 class InputDemo extends React.Component {
   constructor(props) {
@@ -13,11 +13,10 @@ class InputDemo extends React.Component {
     };
   }
 
-    handleNameChange = (e) => {
-      this.setState({ name: e.target.value }, () => {
-        console.log(this.state);
-      });
-    }
+  handleNameChange = (e) => {
+    this.setState({ name: e.target.value })
+    console.log(this.state);
+  };
 
     handleSportChange = (e) => {
       this.setState({ sport: e.target.value }, () => console.log(this.state));
@@ -49,7 +48,7 @@ class InputDemo extends React.Component {
           <>
             <div>
               <p><b>Name:</b></p>
-              <TextField error="" onChange={this.handleNameChange} />
+              <TextField error="" value={this.state.name} onChange={this.handleNameChange} />
               <p><b>Select the game you play?</b></p>
               <SelectField
                 error=""
