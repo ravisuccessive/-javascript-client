@@ -13,7 +13,6 @@ export default function RadioField(props) {
         <Fragment key={label}>
           <Input type="radio" name={Sports} value={value} onChange={onChange} error={error} />
           { label }
-          <br />
         </Fragment>
       ))}
     </>

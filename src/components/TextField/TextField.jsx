@@ -1,7 +1,5 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
-
 import { Error, Input } from './style';
 
 export const TextField = (props) => {
