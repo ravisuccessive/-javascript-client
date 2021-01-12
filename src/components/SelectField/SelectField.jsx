@@ -1,20 +1,17 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
-
 import { Select } from './style';
 
 function SelectField(props) {
   const {
-    error, onChange, options, defaultText,
+    error, onChange, options, defaultText,onBlur
   } = props;
   return (
     <>
-      <Select onChange={onChange} error={error}>
-        { defaultText && <option>{defaultText}</option>}
+      <Select onChange={onChange} onBlur={onBlur}>
+        <option>{defaultText}</option>
         {
-          options && options.length
-          && options.map(({ value, label }) => <option key={label} value={value}>{label}</option>)
+          options.map(({ value, label }) => <option key={label}>{value}</option>)
         }
       </Select>
     </>

@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Input } from './style';
+import { Sports } from '@material-ui/icons';
 
 export default function RadioField(props) {
   const {
@@ -8,9 +9,9 @@ export default function RadioField(props) {
   } = props;
   return (
     <>
-      { options && options.length && options.map(({ value, label }) => (
+      { options.map(({ value, label }) => (
         <Fragment key={label}>
-          <Input type="radio" name="sport" value={value} onChange={onChange} error={error} />
+          <Input type="radio" name={Sports} value={value} onChange={onChange} error={error} />
           { label }
           <br />
         </Fragment>

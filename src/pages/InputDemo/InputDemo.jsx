@@ -14,29 +14,26 @@ class InputDemo extends React.Component {
   }
 
   handleNameChange = (e) => {
-    this.setState({ name: e.target.value })
+    this.setState({ name: e.target.value }, () => {
     console.log(this.state);
-  };
-
-    handleSportChange = (e) => {
-      this.setState({ sport: e.target.value }, () => console.log(this.state));
-      if (e.target.value === 'Select') {
-        this.setState({ sport: '' });
-      }
-      return e.target.value === 'cricket' ? this.setState({ football: '' }) : this.setState({ cricket: '' });
+    });
     }
-
+    
+    handleSportChange = ({ target: { value } }) => {
+    this.setState({ sport: value === 'Select' ? '' : value });
+    return value === 'cricket' ? this.setState({ football: '' }) : this.setState({ cricket: '' }, () => console.log(this.state));
+    }
+    
     handlePositionChange = (e) => {
-      const { sport } = this.state;
-      return sport === 'cricket' ? this.setState({ cricket: e.target.value }, () => console.log(this.state)) : this.setState({ football: e.target.value }, () => console.log(this.state));
+    const { sport } = this.state;
+    return sport === 'cricket' ? this.setState({ cricket: e.target.value }, () => console.log(this.state)) : this.setState({ football: e.target.value }, () => console.log(this.state));
     }
-
-      RadioOption = () => {
+      radioOption = () => {
         let { radioValue } = this.state;
         const { sport } = this.state;
         if (sport === 'cricket') {
           radioValue = radioOptionsCricket;
-        } else if (sport === 'football') {
+        }if (sport === 'football') {
           radioValue = radioOptionsFootball;
         }
         return (radioValue);
@@ -58,13 +55,13 @@ class InputDemo extends React.Component {
               />
               <div>
                 {
-                  (sport === '' || sport === 'Select') ? ''
+                  !sport ? ''
                     : (
                       <>
                         <p><b>What you do?</b></p>
                         <RadioField
                           error=""
-                          options={this.RadioOption()}
+                          options={this.radioOption()}
                           onChange={this.handlePositionChange}
                         />
                       </>
