@@ -3,43 +3,41 @@ import { TextField, SelectField, RadioField } from '../../components';
 import { selectOptions, radioOptionsCricket, radioOptionsFootball } from '../../configs/constants'
 
 class InputDemo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      sport: '',
-      cricket: '',
-      football: '',
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            sport: '',
+            cricket: '',
+            football: '',
+        };
+    }
 
-  handleNameChange = (e) => {
-    this.setState({ name: e.target.value }, () => {
-    console.log(this.state);
-    });
+    handleNameChange = (e) => {
+        this.setState({ name: e.target.value })
     }
-    
+
     handleSportChange = ({ target: { value } }) => {
-    this.setState({ sport: value === 'Select' ? '' : value });
-    return value === 'cricket' ? this.setState({ football: '' }) : this.setState({ cricket: '' });
+        const newSport = value === 'Select' ? '' : value
+        this.setState({ sport: newSport, cricket: '', football: '' })
     }
-    
+
     handlePositionChange = (e) => {
-    const { sport } = this.state;
-    return sport === 'cricket' ? this.setState({ cricket: e.target.value }) : this.setState({ football: e.target.value });
+        const { sport } = this.state;
+        this.setState({ [sport]: e.target.value })
     }
-      radioOption = () => {
+    radioOption = () => {
         let { radioValue } = this.state;
         const { sport } = this.state;
         if (sport === 'cricket') {
-          radioValue = radioOptionsCricket;
-        }if (sport === 'football') {
-          radioValue = radioOptionsFootball;
+            radioValue = radioOptionsCricket;
+        } if (sport === 'football') {
+            radioValue = radioOptionsFootball;
         }
         return (radioValue);
-      };
+    };
 
-      render() {
+    render() {
         const { sport } = this.state;
         console.log(this.state);
         return (
@@ -49,29 +47,29 @@ class InputDemo extends React.Component {
               <TextField error="" value={this.state.name} onChange={this.handleNameChange} />
               <p><b>Select the game you play?</b></p>
               <SelectField
-                error=""
-                onChange={this.handleSportChange}
-                options={selectOptions}
-                defaultText="Select"
-              />
+                        error=""
+                        onChange={this.handleSportChange}
+                        options={selectOptions}
+                        defaultText="Select"
+                    />
               <div>
                 {
-                  !sport ? ''
-                    : (
-                      <>
-                        <p><b>What you do?</b></p>
-                        <RadioField
-                          error=""
-                          options={this.radioOption()}
-                          onChange={this.handlePositionChange}
-                        />
-                      </>
-                    )
-                }
+                            !sport ? ''
+                                : (
+                                  <>
+                                    <p><b>What you do?</b></p>
+                                    <RadioField
+                                            error=""
+                                            options={this.radioOption()}
+                                            onChange={this.handlePositionChange}
+                                        />
+                                  </>
+                                )
+                        }
               </div>
             </div>
           </>
         );
-      }
+    }
 }
 export default InputDemo;
