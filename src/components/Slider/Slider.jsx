@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Img from './style';
-import { PUBLIC_IMAGE_FOLDER, DEFAULT_BANNER_IMAGE, total } from '../../configs/constants';
+import { PUBLIC_IMAGE_FOLDER, DEFAULT_BANNER_IMAGE } from '../../configs/constants';
 import { getRandomNumber, getNextRoundRobin } from '../../libs/utils/math';
 
 class Slider extends Component {
@@ -16,7 +16,7 @@ class Slider extends Component {
     componentDidMount = () => {
         const { random, duration, banner } = this.props;
         this.id = setInterval(() => {
-            const currentIndex = random ? getRandomNumber(banner.length) : getNextRoundRobin(currentIndex, total)
+            const currentIndex = random ? getRandomNumber(banner.length) : getNextRoundRobin(currentIndex, banner)
             this.setState({ current: currentIndex });
         }, duration);
     }

@@ -1,16 +1,13 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
-
 import { Error, Input } from './style';
 
 export const TextField = (props) => {
-    const { value, disabled, error } = props;
+    const { value, onChange, error } = props;
     return (
       <>
-        <Input type="text" value={value} disabled={disabled} />{
-            (error) ? <Error>{error}</Error> : ''
-        }
+        <Input type="text" value={value}  onChange={onChange} />
+        <Error>{error}</Error>
       </>
     );
 };
