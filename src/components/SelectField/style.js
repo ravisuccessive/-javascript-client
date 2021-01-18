@@ -8,7 +8,6 @@ ${(props) => props.error
   border: 1px solid black;
   `};
 `;
-
 const Err = styled.p`
 color: red;
 `;
