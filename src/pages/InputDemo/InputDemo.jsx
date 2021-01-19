@@ -1,8 +1,16 @@
 import React from 'react';
-import { TextField, SelectField, RadioField } from '../../components';
-import { selectOptions, radioOptionsCricket, radioOptionsFootball } from '../../configs/constants'
+import * as yup from 'yup';
+import { TextField, SelectField, RadioField, ButtonField } from '../../components';
+import { selectOptions, radioOptionsCricket, radioOptionsFootball } from '../../configs/constants';
 
 class InputDemo extends React.Component {
+    schema = yup.object().shape({
+        name: yup.string().required('Name is a required field').min(3),
+        sport: yup.string().required('Sport is a required field'),
+        cricket: yup.string().when('sport', { is: 'cricket', then: yup.string().required('What you do is a required field') }),
+        football: yup.string().when('sport', { is: 'football', then: yup.string().required('What you do is a required field') }),
+    });
+
     constructor(props) {
         super(props);
         this.state = {
@@ -10,6 +18,12 @@ class InputDemo extends React.Component {
             sport: '',
             cricket: '',
             football: '',
+            touched: {
+                name: false,
+                sport: false,
+                cricket: false,
+                football: false,
+            },
         };
     }
 
@@ -26,31 +40,63 @@ class InputDemo extends React.Component {
         const { sport } = this.state;
         this.setState({ [sport]: e.target.value })
     }
-    radioOption = () => {
+
+    RadioOption = () => {
         let { radioValue } = this.state;
         const { sport } = this.state;
         if (sport === 'cricket') {
             radioValue = radioOptionsCricket;
-        } if (sport === 'football') {
+        } else if (sport === 'football') {
             radioValue = radioOptionsFootball;
         }
         return (radioValue);
     };
 
+    getError = (field) => {
+        const { touched } = this.state;
+        if (touched[field] && this.hasErrors()) {
+            try {
+                this.schema.validateSyncAt(field, this.state);
+            } catch (err) {
+                return err.message;
+            }
+        }
+        return true;
+    };
+
+    hasErrors = () => {
+        try {
+            this.schema.validateSync(this.state);
+        } catch (err) {
+            return true;
+        }
+        return false;
+    }
+
+    isTouched = (field) => {
+        const { touched } = this.state;
+        this.setState({
+            touched: {
+                ...touched,
+                [field]: true,
+            },
+        });
+    }
+
     render() {
         const { sport } = this.state;
-        console.log(this.state);
         return (
           <>
             <div>
               <p><b>Name:</b></p>
-              <TextField error="" value={this.state.name} onChange={this.handleNameChange} />
+              <TextField error={this.getError('name')} onChange={this.handleNameChange} onBlur={() => this.isTouched('name')} />
               <p><b>Select the game you play?</b></p>
               <SelectField
-                        error=""
+                        error={this.getError('sport')}
                         onChange={this.handleSportChange}
                         options={selectOptions}
                         defaultText="Select"
+                        onBlur={() => this.isTouched('sport')}
                     />
               <div>
                 {
@@ -59,17 +105,23 @@ class InputDemo extends React.Component {
                                   <>
                                     <p><b>What you do?</b></p>
                                     <RadioField
-                                            error=""
-                                            options={this.radioOption()}
+                                            error={this.getError(sport)}
+                                            options={this.RadioOption()}
                                             onChange={this.handlePositionChange}
+                                            onBlur={() => this.isTouched(sport)}
                                         />
                                   </>
                                 )
                         }
               </div>
+              <div>
+                <ButtonField value="Cancel" />
+                <ButtonField value="Submit" disabled={this.hasErrors()} />
+              </div>
             </div>
           </>
         );
     }
+
 }
 export default InputDemo;

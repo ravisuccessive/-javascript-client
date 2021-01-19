@@ -2,22 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Error, Input } from './style';
 
-export const TextField = (props) => {
-    const { value, onChange, error } = props;
+const TextField = (props) => {
+    const {
+        value, disabled, error, onChange, onBlur,
+    } = props;
+
     return (
-      <>
-        <Input type="text" value={value}  onChange={onChange} />
-        <Error>{error}</Error>
-      </>
+      <div>
+        <Input type="text" value={value} disabled={disabled} onChange={onChange} onBlur={onBlur} />
+        { (error) ? <Error>{error}</Error> : ''}
+      </div>
     );
 };
+
 TextField.propTypes = {
-    value: PropTypes.string,
-    disabled: PropTypes.string,
+    value: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
     error: PropTypes.string,
+    onChange: PropTypes.func,
+    onBlur: PropTypes.string.isRequired,
 };
 TextField.defaultProps = {
-    value: '',
-    disabled: '',
+    disabled: false,
     error: '',
+    onChange: '',
 };
+
+export default TextField;
