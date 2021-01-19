@@ -4,46 +4,41 @@ import {TextField, SelectField, RadioField, ButtonField} from '../../components'
 import { selectOptions, radioOptionsCricket, radioOptionsFootball } from '../../configs/constants';
 
 class InputDemo extends React.Component {
-  schema = yup.object().shape({
-    name: yup.string().required('Name is a required field').min(3),
-    sport: yup.string().required('Sport is a required field'),
-    cricket: yup.string().when('sport', { is: 'cricket', then: yup.string().required('What you do is a required field') }),
-    football: yup.string().when('sport', { is: 'football', then: yup.string().required('What you do is a required field') }),
-  });
+    schema = yup.object().shape({
+      name: yup.string().required('Name is a required field').min(3),
+      sport: yup.string().required('Sport is a required field'),
+      cricket: yup.string().when('sport', { is: 'cricket', then: yup.string().required('What you do is a required field') }),
+      football: yup.string().when('sport', { is: 'football', then: yup.string().required('What you do is a required field') }),
+    });
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      sport: '',
-      cricket: '',
-      football: '',
-      touched: {
-        name: false,
-        sport: false,
-        cricket: false,
-        football: false,
-      },
-    };
-  }
-
+    constructor(props) {
+      super(props);
+      this.state = {
+        name: '',
+        sport: '',
+        cricket: '',
+        football: '',
+        touched: {
+          name: false,
+          sport: false,
+          cricket: false,
+          football: false,
+        },
+      };
+    }
+    
     handleNameChange = (e) => {
-      this.setState({ name: e.target.value }, () => {
-        console.log(this.state);
-      });
+        this.setState({ name: e.target.value })
     }
-
-    handleSportChange = (e) => {
-      this.setState({ sport: e.target.value }, () => console.log(this.state));
-      if (e.target.value === 'Select') {
-        this.setState({ sport: '' });
-      }
-      return e.target.value === 'cricket' ? this.setState({ football: '' }) : this.setState({ cricket: '' });
+    
+    handleSportChange = ({ target: { value } }) => {
+        const newSport = value === 'Select' ? '' : value
+        this.setState({ sport: newSport, cricket: '', football: '' })
     }
-
+    
     handlePositionChange = (e) => {
-      const { sport } = this.state;
-      return sport === 'cricket' ? this.setState({ cricket: e.target.value }, () => console.log(this.state)) : this.setState({ football: e.target.value }, () => console.log(this.state));
+        const { sport } = this.state;
+        this.setState({ [sport]: e.target.value })
     }
 
       RadioOption = () => {
@@ -105,7 +100,7 @@ class InputDemo extends React.Component {
               />
               <div>
                 {
-                  (sport === '' || sport === 'Select') ? ''
+                   !sport ? ''
                     : (
                       <>
                         <p><b>What you do?</b></p>
@@ -127,5 +122,6 @@ class InputDemo extends React.Component {
           </>
         );
       }
+
 }
 export default InputDemo;

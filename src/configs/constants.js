@@ -4,9 +4,7 @@ export const DEFAULT_BANNER_IMAGE = 'banners/default.png';
 
 export const banners = ['banners/cloud.jpg', 'banners/dns-server.png', 'banners/full-stack-web-development.jpg', 'banners/load-balancer.png'];
 
-export const total = 5;
-
-const selectOptions = [
+export const selectOptions = [
   {
     label: 'Cricket',
     value: 'cricket',
@@ -18,7 +16,7 @@ const selectOptions = [
 
 ];
 
-const radioOptionsCricket = [
+export const radioOptionsCricket = [
   {
     label: 'Batsman',
     value: 'batsman',
@@ -37,7 +35,8 @@ const radioOptionsCricket = [
   },
 ];
 
-const radioOptionsFootball = [
+
+export const radioOptionsFootball = [
   {
     label: 'Striker',
     value: ' striker',
@@ -48,4 +47,3 @@ const radioOptionsFootball = [
   },
 ];
 
-export { radioOptionsCricket, radioOptionsFootball, selectOptions };
