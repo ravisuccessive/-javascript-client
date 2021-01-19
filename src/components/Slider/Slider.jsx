@@ -56,5 +56,6 @@ Slider.defaultProps = {
   duration: 2000,
   height: 200,
   random: false,
+}
 export default Slider;
 
