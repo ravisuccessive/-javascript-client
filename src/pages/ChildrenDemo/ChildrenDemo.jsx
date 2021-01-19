@@ -4,12 +4,6 @@ import Calculation from '../../components/Math/Math';
 import Theme from '../../theme';
 
 export default class CalcultorDemo extends React.Component {
-  Result() {
-    let { result } = this.state;
-    result = '';
-    this.setState({ result });
-  }
-
   render() {
     return (
       <>
@@ -22,18 +16,7 @@ export default class CalcultorDemo extends React.Component {
             {
               (first, second, result) => (
                 <p>
-                  Sum of
-                  {' '}
-                  {first}
-                  {' '}
-                  and
-                  {' '}
-                  {second}
-                  {' '}
-                  is equal to
-                  {' '}
-                  {result}
-                  {' '}
+                  {`Sum of ${first} and ${second} is equal to ${result}`}
                 </p>
               )
             }
@@ -42,19 +25,7 @@ export default class CalcultorDemo extends React.Component {
             {
               (first, second, result) => (
                 <p>
-                  When we add
-                  {' '}
-                  {first}
-                  {' '}
-                  with
-                  {' '}
-                  {second}
-                  {' '}
-                  then we will get
-                  {' '}
-                  {result}
-                  {' '}
-                  as result
+                  {`When we add ${first} with ${second} then we will get ${result}`}
                 </p>
               )
             }

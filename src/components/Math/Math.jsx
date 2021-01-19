@@ -1,51 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const Result = (first, second, operator) => {
+    let result;
+    if (!['+', '-', '*', '/'].includes(operator)) {
+        result = 'invalid operation';
+    } else {
+        result = eval(`${first} ${operator} ${second}`);
+    }
+    return result;
+};
 const Calculation = (props) => {
-  const {
-    first, second, operator, children,
-  } = props;
-  let { result } = props;
-  switch (operator) {
-  case '+': result = first + second;
-    break;
-  case '-': result = first - second;
-    break;
-  case '*': result = first * second;
-    break;
-  case '/': result = first / second;
-    break;
-  default: return ('invalid operator');
-  }
-  if (children) {
-    return children(first, second, result);
-  }
-  return (
-    <>
+    const {
+        first, second, operator, children,
+    } = props;
+    if (children) {
+        return children(first, second, Result(first, second, operator));
+    }
+    return (
       <p>
-        {' '}
-        {first}
-        {' '}
-        {operator}
-        {' '}
-        {second}
-        {' '}
-        =
-        {' '}
-        {result}
-        {' '}
+        {`Result of ${first} ${operator} ${second} is ${Result(first, second, operator)}`}
       </p>
-    </>
-  );
+    );
 };
+
 Calculation.propTypes = {
-  first: PropTypes.number.isRequired,
-  second: PropTypes.number.isRequired,
-  operator: PropTypes.string.isRequired,
-  result: PropTypes.number.isRequired,
-  children: PropTypes.func,
+    first: PropTypes.number.isRequired,
+    second: PropTypes.number.isRequired,
+    operator: PropTypes.string.isRequired,
+    children: PropTypes.func,
 };
+
 Calculation.defaultProps = {
-  children: null,
+    children: null,
 };
+
 export default Calculation;
