@@ -46,7 +46,7 @@ class InputDemo extends React.Component {
         const { sport } = this.state;
         if (sport === 'cricket') {
             radioValue = radioOptionsCricket;
-        } else if (sport === 'football') {
+        }if (sport === 'football') {
             radioValue = radioOptionsFootball;
         }
         return (radioValue);
@@ -122,6 +122,5 @@ class InputDemo extends React.Component {
           </>
         );
     }
-
 }
 export default InputDemo;
