@@ -1,19 +1,6 @@
-// import { render } from '@testing-library/react';
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from 'react-router-dom';
-import {
-  TextFieldDemo,
-  InputDemo,
-  Trainee,
-  ChildrenDemo,
-  Login,
-  NotFound,
-} from './pages/index';
+import { BrowserRouter as Router, Route, Redirect,Switch } from 'react-router-dom';
+import { TextFieldDemo, InputDemo, Trainee, ChildrenDemo, Login, NotFound,} from './pages/index';
 import { AuthRoute, PrivateRoute } from './routes/index';
 
 const App = () => (
