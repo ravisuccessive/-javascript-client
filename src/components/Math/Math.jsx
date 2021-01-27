@@ -12,7 +12,7 @@ const getResult = (first, second, operator) => {
 };
 const Calculation = (props) => {
     const {
-      first, second, operator, children,
+        first, second, operator, children,
     } = props;
     if (children) {
       return children(first, second, getResult(first, second, operator));
@@ -22,17 +22,17 @@ const Calculation = (props) => {
         {`Result of ${first} ${operator} ${second} is ${getResult(first, second, operator)}`}
       </p>
     );
-  };
-  
-  Calculation.propTypes = {
+};
+
+Calculation.propTypes = {
     first: PropTypes.number.isRequired,
     second: PropTypes.number.isRequired,
     operator: PropTypes.string.isRequired,
     children: PropTypes.func,
-  };
-  
-  Calculation.defaultProps = {
+};
+
+Calculation.defaultProps = {
     children: null,
-  };
-  
-  export default Calculation;
+};
+
+export default Calculation;

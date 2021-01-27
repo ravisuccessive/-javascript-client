@@ -58,4 +58,3 @@ Slider.defaultProps = {
   random: false,
 }
 export default Slider;
-
