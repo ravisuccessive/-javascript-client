@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button, Dialog, DialogContentText, DialogContent, DialogTitle,
-} from '@material-ui/core';
+import { Button, Dialog, DialogContentText, DialogContent, DialogTitle } from '@material-ui/core';
 import { Email, Person, VisibilityOff } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import schema from './Schema';
-import Handler from './Handler';
+import DialogTextfield from './DialogTextfield';
 
 const passwordStyle = () => ({
   passfield: {
@@ -93,7 +91,7 @@ class AddDialog extends React.Component {
     const { name, email, password } = this.state;
     const ans = [];
     Object.keys(constant).forEach((key) => {
-      ans.push(<Handler
+      ans.push(<DialogTextfield
         label={key}
         onChange={this.handleChange(key)}
         onBlur={() => this.isTouched(key)}

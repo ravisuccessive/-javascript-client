@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TextField, InputAdornment } from '@material-ui/core';
 
-function dialogTextfield(props) {
+function DialogTextfield(props) {
   const {
     error, helperText, onChange, onBlur, label, type, icons,
   } = props;
@@ -31,8 +31,8 @@ function dialogTextfield(props) {
     </>
   );
 }
-export default dialogTextfield;
-dialogTextfield.propTypes = {
+export default DialogTextfield;
+DialogTextfield.propTypes = {
   error: PropTypes.bool,
   helperText: PropTypes.string,
   onChange: PropTypes.func.isRequired,
@@ -41,7 +41,7 @@ dialogTextfield.propTypes = {
   type: PropTypes.string,
   icons: PropTypes.instanceOf(Object),
 };
-dialogTextfield.defaultProps = {
+DialogTextfield.defaultProps = {
   error: false,
   helperText: '',
   label: '',
