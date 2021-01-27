@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button, Dialog, DialogContentText, DialogContent, DialogTitle,
-} from '@material-ui/core';
+import { Button, Dialog, DialogContentText, DialogContent, DialogTitle } from '@material-ui/core';
 import { Email, Person, VisibilityOff } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import schema from './Schema';
-import Handler from './Handler';
+import DialogTextfield from './DialogTextfield';
 
 const passwordStyle = () => ({
   passfield: {
@@ -20,7 +18,7 @@ const passwordStyle = () => ({
 
 const constant = {
   name: Person,
-  email: Email,
+  emailId: Email,
   password: VisibilityOff,
   confirmPassword: VisibilityOff,
 };
@@ -84,9 +82,9 @@ class AddDialog extends React.Component {
     } = this.props;
 
     const { name, email, password } = this.state;
-    const ans = [];
+    const textField = [];
     Object.keys(constant).forEach((key) => {
-      ans.push(<Handler
+      textField.push(<DialogTextfield
         label={key}
         onChange={this.handleChange(key)}
         onBlur={() => this.isTouched(key)}
@@ -105,20 +103,20 @@ class AddDialog extends React.Component {
               Enter your trainee Details
             </DialogContentText>
             <div>
-              {ans[0]}
+              {textField[0]}
             </div>
               &nbsp;
             <div>
-              {ans[1]}
+              {textField[1]}
             </div>
               &nbsp;
             <div className={classes.passfield}>
               <div className={classes.pass}>
-                {ans[2]}
+                {textField[2]}
               </div>
               &nbsp;
               <div className={classes.pass}>
-                {ans[3]}
+                {textField[3]}
               </div>
             </div>
               &nbsp;
