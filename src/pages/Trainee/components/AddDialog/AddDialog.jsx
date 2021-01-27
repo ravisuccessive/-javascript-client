@@ -20,19 +20,19 @@ const passwordStyle = () => ({
 
 const constant = {
   Name: Person,
-  'Email Id': Email,
+  emailId: Email,
   Password: VisibilityOff,
-  'Confirm Password': VisibilityOff,
+  confirmPassword: VisibilityOff,
 };
 
 class AddDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Name: '',
-      Email: '',
-      Password: '',
-      ConfirmPassword: '',
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
       touched: {
         name: false,
         email: false,
