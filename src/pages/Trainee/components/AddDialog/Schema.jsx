@@ -1,4 +1,4 @@
-import * as yup from 'yup';
+ import * as yup from 'yup';
 
 const schema = yup.object().shape({
   name: yup.string().trim().required('Name is a required field').min(5),

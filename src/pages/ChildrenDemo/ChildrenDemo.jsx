@@ -1,18 +1,18 @@
 import React from 'react';
 import { ThemeProvider } from '@material-ui/core';
-import Calculation from '../../components/Math/Math';
+import Math from '../../components';
 import Theme from '../../theme';
 
-export default class CalcultorDemo extends React.Component {
+class ChildrenDemo extends React.PureComponent {
   render() {
     return (
       <>
         <ThemeProvider theme={Theme}>
-          <Calculation first={7} second={4} operator="+" />
-          <Calculation first={7} second={3} operator="-" />
-          <Calculation first={7} second={20} operator="*" />
-          <Calculation first={7} second={0} operator="/" />
-          <Calculation first={7} second={4} operator="+">
+          <Math first={7} second={4} operator="+" />
+          <Math first={7} second={3} operator="-" />
+          <Math first={7} second={20} operator="*" />
+          <Math first={7} second={0} operator="/" />
+          <Math first={7} second={4} operator="+">
             {
               (first, second, result) => (
                 <p>
@@ -20,8 +20,8 @@ export default class CalcultorDemo extends React.Component {
                 </p>
               )
             }
-          </Calculation>
-          <Calculation first={3} second={4} operator="+">
+          </Math>
+          <Math first={3} second={4} operator="+">
             {
               (first, second, result) => (
                 <p>
@@ -29,9 +29,10 @@ export default class CalcultorDemo extends React.Component {
                 </p>
               )
             }
-          </Calculation>
+          </Math>
         </ThemeProvider>
       </>
     );
   }
 }
+export default ChildrenDemo;

@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import AddDialog from './components/AddDialog/AddDialog';
+import { NavBar } from '../components';
 
 export default class Trainee extends React.Component {
   constructor(props) {
@@ -18,20 +19,21 @@ export default class Trainee extends React.Component {
     this.setState({ open: false });
   };
 
-  handleSubmit = (data) => {
-    this.setState({
-      open: true,
-    }, () => {
-      console.log(data);
-    });
+  handleSubmit = (userData) => {
+    console.log('UserData', userData);
+    this.setState({ open: false });
   }
 
   render() {
     const { open } = this.state;
     return (
       <>
+        <NavBar />
+        <br />
         <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>ADD TRAINEE</Button>
-        <AddDialog open={open} onSubmit={this.handleClose} onClose={this.handleClose} />
+        <Button>
+          <AddDialog open={open} onSubmit={this.handleSubmit} onClose={this.handleClose} />
+        </Button>
       </>
     );
   }
