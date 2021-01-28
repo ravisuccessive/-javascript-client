@@ -115,36 +115,8 @@ class InputDemo extends React.Component {
                         }
               </div>
               <div>
-                <p><b>Name:</b></p>
-                <TextField error={this.getError('name')} onChange={this.handleNameChange} onBlur={this.handleBlur('name')} />
-                <p><b>Select the game you play?</b></p>
-                <SelectField
-                  error={this.getError('sport')}
-                  onChange={this.handleSportChange}
-                  options={selectOptions}
-                  defaultText="Select"
-                  onBlur={this.handleBlur('sport')}
-                />
-                <div>
-                  {
-                    (sport === '' || sport === 'Select') ? ''
-                      : (
-                        <>
-                          <p><b>What you do?</b></p>
-                          <RadioField
-                            error={this.getError(sport)}
-                            options={this.RadioOption()}
-                            onChange={this.handlePositionChange}
-                            onBlur={this.handleBlur(sport)}
-                          />
-                        </>
-                      )
-                  }
-                </div>
-                <div>
-                  <ButtonField value="Cancel" />
-                  <ButtonField value="Submit" disabled={this.hasErrors() || !this.isTouched()} />
-                </div>
+                <ButtonField value="Cancel" />
+                <ButtonField value="Submit" disabled={this.hasErrors() || !this.isTouched()} />
               </div>
             </div>
           </>

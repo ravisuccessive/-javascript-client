@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  TextField, Typography, CardContent, InputAdornment, Button, Avatar, Card, CssBaseline, withStyles,
-} from '@material-ui/core';
+import { TextField, Typography, CardContent, InputAdornment, Button, Avatar, Card, CssBaseline, withStyles,} from '@material-ui/core';
 import { LockOutlined } from '@material-ui/icons';
 import { schema } from '../../configs/constants'
 import { Email, VisibilityOff } from '@material-ui/icons';
@@ -72,19 +70,22 @@ class Login extends React.Component {
     const { classes } = this.props;
     return (
       <>
-        <div className={classes.main}><CssBaseline /><Card open aria-labelledby="form-dialog-title"><Avatar className={classes.icon}><LockOutlined />
-        </Avatar><Typography variant="h3" align="center">Login</Typography><CardContent><form><div><TextField
-                      helperText={this.getError('email')}
-                      error={!!this.getError('email')}
-                      required
-                      id="outlined-required"
-                      label="Email Address"
-                      defaultValue=" "
-                      variant="outlined"
-                      fullWidth
-                      onChange={this.handleChange('email')}
-                      onBlur={() => this.isTouched('email')}
-                      InputProps={{
+        <div className={classes.main}><CssBaseline />
+          <Card open aria-labelledby="form-dialog-title">
+            <Avatar className={classes.icon}><LockOutlined /></Avatar>
+            <Typography variant="h3" align="center">Login</Typography>
+            <CardContent><form><div><TextField
+                    helperText={this.getError('email')}
+                    error={!!this.getError('email')}
+                    required
+                    id="outlined-required"
+                    label="Email Address"
+                    defaultValue=" "
+                    variant="outlined"
+                    fullWidth
+                    onChange={this.handleChange('email')}
+                    onBlur={() => this.isTouched('email')}
+                    InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
                             <Email />
@@ -109,7 +110,8 @@ class Login extends React.Component {
                           </InputAdornment>
                         ),
                       }}
-                    /></div>&nbsp; <div><Button variant="contained" color="primary" disabled={this.hasErrors()} fullWidth>SIGN IN</Button></div></form> </CardContent> </Card></div></>
+                    /></div>&nbsp; <div><Button variant="contained" color="primary" disabled={this.hasErrors()} fullWidth>SIGN IN</Button></div></form> </CardContent> 
+          </Card></div></>
       );
     }
 }
