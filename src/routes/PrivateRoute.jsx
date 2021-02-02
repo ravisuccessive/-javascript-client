@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { PrivateLayout } from '../Layouts';
 
-function PrivateRoute({ component: Component, ...rest }) {
+export default function PrivateRoute({ component: Component, ...rest }) {
     return (
         <Route
             {...rest}
@@ -18,4 +18,3 @@ function PrivateRoute({ component: Component, ...rest }) {
 PrivateRoute.propTypes = {
   component: PropTypes.object.isRequired,
 };
-export default PrivateRoute;
