@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from '@material-ui/core';
-import Math from '../../components';
+import { Math } from '../../components';
 import Theme from '../../theme';
 
 class ChildrenDemo extends React.PureComponent {

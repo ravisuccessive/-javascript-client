@@ -10,7 +10,7 @@ const TextField = (props) => {
     return (
       <div>
         <Input type="text" value={value} disabled={disabled} onChange={onChange} onBlur={onBlur} />
-        { (error) ? <Error>{error}</Error> : ''}
+        <Error>{error}</Error>
       </div>
     );
 };
