@@ -28,10 +28,10 @@ function NavBar() {
             <Typography variant="h6" className={classes.title}>
               Trainee Portal
             </Typography>
-            <Button component={Link} to="/Trainee" color="inherit">TRAINEE</Button>
-            <Button component={Link} to="/TextFieldDemo" color="inherit">TEXTFIELD DEMO</Button>
-            <Button component={Link} to="/InputDemo" color="inherit">INPUT DEMO</Button>
-            <Button component={Link} to="/ChildrenDemo" color="inherit">CHILDREN DEMO</Button>
+            <Button component={Link} to="/Trainee" color="inherit">trainee</Button>
+            <Button component={Link} to="/TextFieldDemo" color="inherit">textfield demo</Button>
+            <Button component={Link} to="/InputDemo" color="inherit">inputdemo</Button>
+            <Button component={Link} to="/ChildrenDemo" color="inherit">childrendemo</Button>
             <Button color="inherit" className={classes.logout}>LOGOUT</Button>
           </Toolbar>
         </AppBar>

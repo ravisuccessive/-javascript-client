@@ -12,7 +12,7 @@ const App = () => (
         </Route>
         <AuthRoute path="/login" component={Login} />
         <PrivateRoute path="/childrendemo" component={ChildrenDemo} />
-        <PrivateRoute path="/textFieldDemo" component={TextFieldDemo} />
+        <PrivateRoute path="/textField demo" component={TextFieldDemo} />
         <PrivateRoute path="/inputdemo" component={InputDemo} />
         <PrivateRoute path="/trainee" component={Trainee} />
         <PrivateRoute component={NotFound} />
