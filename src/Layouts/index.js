@@ -1,4 +1,3 @@
-import AuthLayout from './AuthLayout/index';
-import PrivateLayout from './PrivateLayout/index';
+export { AuthLayout } from './AuthLayout';
+export { PrivateLayout } from './PrivateLayout';
 
-export { AuthLayout, PrivateLayout };

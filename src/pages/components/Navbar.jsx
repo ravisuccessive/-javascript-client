@@ -23,10 +23,10 @@ function NavBar(props) {
           <Typography variant="h6" className={classes.title}>
             Trainee Portal
           </Typography>
-          <Button color="inherit">TRAINEE</Button>
-          <Button color="inherit">TEXTFIELD DEMO</Button>
-          <Button color="inherit">INPUT DEMO</Button>
-          <Button color="inherit">CHILDREN DEMO</Button>
+          <Button color="inherit">trainee</Button>
+          <Button color="inherit">textfielddemo</Button>
+          <Button color="inherit">inputdemo</Button>
+          <Button color="inherit">childrendemo</Button>
           <Button color="inherit" className={classes.logout}>LOGOUT</Button>
         </Toolbar>
       </AppBar>

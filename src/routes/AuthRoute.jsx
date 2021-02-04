@@ -1,21 +1,19 @@
-/* eslint-disable */
 import React from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { AuthLayout } from '../Layouts';
 
-function AuthRoute({ component: Component, ...rest }) {
+export default function AuthRoute({ component: Component, ...rest }) {
     return (
-        <Route
+      <Route
             {...rest}
             render={(matchProps) => (
-                <AuthLayout>
-                    <Component {...matchProps} />
-                </AuthLayout>
+              <AuthLayout>
+                <Component {...matchProps} />
+              </AuthLayout>
             )} />
     );
 }
 AuthRoute.propTypes = {
-  component: PropTypes.object.isRequired,
+  component: PropTypes.func.isRequired,
 };
-export default AuthRoute;
