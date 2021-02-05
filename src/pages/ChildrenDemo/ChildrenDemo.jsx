@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from '@material-ui/core';
-import Math from '../../components/Math/Math';
+import { Math } from '../../components';
 import Theme from '../../theme';
 
 class ChildrenDemo extends React.PureComponent {
@@ -16,18 +16,7 @@ class ChildrenDemo extends React.PureComponent {
             {
               (first, second, result) => (
                 <p>
-                  Sum of
-                  {' '}
-                  {first}
-                  {' '}
-                  and
-                  {' '}
-                  {second}
-                  {' '}
-                  is equal to
-                  {' '}
-                  {result}
-                  {' '}
+                  {`Sum of ${first} and ${second} is equal to ${result}`}
                 </p>
               )
             }
@@ -36,19 +25,7 @@ class ChildrenDemo extends React.PureComponent {
             {
               (first, second, result) => (
                 <p>
-                  When we add
-                  {' '}
-                  {first}
-                  {' '}
-                  with
-                  {' '}
-                  {second}
-                  {' '}
-                  then we will get
-                  {' '}
-                  {result}
-                  {' '}
-                  as result
+                  {`When we add ${first} with ${second} then we will get ${result}`}
                 </p>
               )
             }
