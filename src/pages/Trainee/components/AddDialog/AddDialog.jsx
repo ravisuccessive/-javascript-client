@@ -1,14 +1,13 @@
 /* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button, Dialog, DialogContentText, DialogContent, DialogTitle,
-} from '@material-ui/core';
+import { Button, Dialog, DialogContentText, DialogContent, DialogTitle } from '@material-ui/core';
 import { Email, Person, VisibilityOff } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import schema from './Schema';
 import { snackbarContext } from '../../../../contexts/SnackBarProvider/index';
-import Handler from './Handler';
+import Handler from './AddDialog';
+
 
 const passwordStyle = () => ({
   passfield: {

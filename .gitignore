@@ -2,10 +2,21 @@
 
 # dependencies
 /node_modules
-/.pnp
 .pnp.js
+<<<<<<< HEAD
 /package-lock.json
+<<<<<<< HEAD
 /.eslintcache
+=======
+.eslintcache
+=======
+.vscode
+package-lock.json
+react-app-env.d.ts
+.eslintcache
+
+>>>>>>> 86fd802a1cfc85eb0359d46ebcbcb6fdc5cd9ab2
+>>>>>>> cba094aff69fba76d47c040ab5675bc471d34a77
 
 # testing
 /coverage

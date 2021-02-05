@@ -11,8 +11,7 @@ function SelectField(props) {
       <Select onChange={onChange} error={error} onBlur={onBlur}>
         { defaultText && <option>{defaultText}</option>}
         {
-          options && options.length
-          && options.map(({ value, label }) => <option key={label} value={value}>{label}</option>)
+        options.map(({ value, label }) => <option key={label} value={value}>{label}</option>)
         }
       </Select>
       <Err>{error}</Err>
