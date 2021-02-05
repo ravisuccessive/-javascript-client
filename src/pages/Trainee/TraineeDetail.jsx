@@ -43,11 +43,12 @@ const style = (theme) => ({
 function TraineeDetails(props) {
   const { classes } = props;
   const { match } = props;
-  const traineeData = trainee.find(({ id }) => id === match.params.traineeId);
+  const { traineeId } = match.params;
+  const traineeData = trainee.find(({ id }) => id === traineeId);
   const getDateFormatted = () => moment(traineeData.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a');
-  if (traineeData === undefined) {
+  if (!traineeData) {
     return (
-      <Route component={NotFound} />
+      < NotFound />
     );
   }
   return (
