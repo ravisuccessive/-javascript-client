@@ -1,92 +1,90 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button, Dialog, DialogContentText, DialogContent, DialogTitle,
-} from '@material-ui/core';
+import { Button, Dialog, DialogContentText, DialogContent, DialogTitle } from '@material-ui/core';
 import { Email, Person, VisibilityOff } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import schema from './Schema';
-import Handler from './Handler';
+import DialogTextfield from './DialogTextfield';
 
 const passwordStyle = () => ({
-  passfield: {
-    display: 'flex',
-    flexdirection: 'row',
-  },
-  pass: {
-    flex: 1,
-  },
+    passfield: {
+        display: 'flex',
+        flexdirection: 'row',
+    },
+    pass: {
+        flex: 1,
+    },
 });
 
 const constant = {
   name: Person,
-  email: Email,
+  emailId: Email,
   password: VisibilityOff,
   confirmPassword: VisibilityOff,
 };
 
 class AddDialog extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      touched: {
-        name: false,
-        email: false,
-        password: false,
-        confirmPassword: false,
-      },
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            touched: {
+                name: false,
+                email: false,
+                password: false,
+                confirmPassword: false,
+            },
+        };
+    }
+
+    handleChange = (key) => ({ target: { value } }) => {
+        this.setState({ [key]: value });
     };
-  }
 
-  handleChange = (key) => ({ target: { value } }) => {
-    this.setState({ [key]: value });
-  };
+    hasErrors = () => {
+        try {
+            schema.validateSync(this.state);
+        } catch (err) {
+            return true;
+        }
+        return false;
+    };
 
-  hasErrors = () => {
-    try {
-      schema.validateSync(this.state);
-    } catch (err) {
-      return true;
-    }
-    return false;
-  };
-
-  getError = (field) => {
-    const { touched } = this.state;
-    if (touched[field] && this.hasErrors()) {
-      try {
-        schema.validateSyncAt(field, this.state);
+    getError = (field) => {
+        const { touched } = this.state;
+        if (touched[field] && this.hasErrors()) {
+            try {
+                schema.validateSyncAt(field, this.state);
+                return '';
+            } catch (err) {
+                return err.message;
+            }
+        }
         return '';
-      } catch (err) {
-        return err.message;
-      }
+    };
+
+    isTouched = (field) => {
+        const { touched } = this.state;
+        this.setState({
+            touched: {
+                ...touched,
+                [field]: true,
+            },
+        });
     }
-    return '';
-  };
 
-  isTouched = (field) => {
-    const { touched } = this.state;
-    this.setState({
-      touched: {
-        ...touched,
-        [field]: true,
-      },
-    });
-  }
-
-  render() {
-    const {
-      open, onClose, onSubmit, classes,
-    } = this.props;
+    render() {
+        const {
+            open, onClose, onSubmit, classes,
+        } = this.props;
 
     const { name, email, password } = this.state;
-    const ans = [];
+    const textField = [];
     Object.keys(constant).forEach((key) => {
-      ans.push(<Handler
+      textField.push(<DialogTextfield
         label={key}
         onChange={this.handleChange(key)}
         onBlur={() => this.isTouched(key)}
@@ -105,20 +103,20 @@ class AddDialog extends React.Component {
               Enter your trainee Details
             </DialogContentText>
             <div>
-              {ans[0]}
+              {textField[0]}
             </div>
               &nbsp;
             <div>
-              {ans[1]}
+              {textField[1]}
             </div>
               &nbsp;
             <div className={classes.passfield}>
               <div className={classes.pass}>
-                {ans[2]}
+                {textField[2]}
               </div>
               &nbsp;
               <div className={classes.pass}>
-                {ans[3]}
+                {textField[3]}
               </div>
             </div>
               &nbsp;
@@ -129,8 +127,8 @@ class AddDialog extends React.Component {
           </DialogContent>
         </Dialog>
       </>
-    );
-  }
+        );
+    }
 }
 AddDialog.propTypes = {
   open: PropTypes.bool.isRequired,
