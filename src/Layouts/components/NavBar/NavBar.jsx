@@ -4,6 +4,7 @@ import {
   AppBar, Toolbar, Typography, CssBaseline, Button,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import localStorage from 'local-storage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const handleLogout = () => {
+  localStorage.remove('token');
+};
+
 function NavBar() {
   const classes = useStyles();
   return (
@@ -28,11 +33,11 @@ function NavBar() {
             <Typography variant="h6" className={classes.title}>
               Trainee Portal
             </Typography>
-            <Button component={Link} to="/Trainee" color="inherit">trainee</Button>
-            <Button component={Link} to="/TextFieldDemo" color="inherit">textfield demo</Button>
-            <Button component={Link} to="/InputDemo" color="inherit">inputdemo</Button>
-            <Button component={Link} to="/ChildrenDemo" color="inherit">childrendemo</Button>
-            <Button color="inherit" className={classes.logout}>LOGOUT</Button>
+            <Button component={Link} to="/Trainee" color="inherit">TRAINEE</Button>
+            <Button component={Link} to="/TextFieldDemo" color="inherit">TEXTFIELD DEMO</Button>
+            <Button component={Link} to="/InputDemo" color="inherit">INPUT DEMO</Button>
+            <Button component={Link} to="/ChildrenDemo" color="inherit">CHILDREN DEMO</Button>
+            <Button color="inherit" href="/login" onClick={() => handleLogout()}>LOGOUT</Button>
           </Toolbar>
         </AppBar>
       </div>
