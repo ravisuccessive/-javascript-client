@@ -43,9 +43,13 @@ const TableComponent = (props) => {
     </TableContainer>
   );
 };
+TableComponent.defaultPropsTypes = {
+    data: '',
+    column:'{}'
+}
 TableComponent.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  column: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf.isRequired,
+  column: PropTypes.arrayOf.isRequired,
 };
 export default withStyles(useStyles)(TableComponent);
