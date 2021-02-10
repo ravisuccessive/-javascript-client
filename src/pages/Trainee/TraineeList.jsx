@@ -4,9 +4,10 @@ import * as moment from 'moment';
 import { Button, withStyles } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { AddDialog, EditDialog, DeleteDialog } from './components';
+import { AddDialog, EditDialog, DeleteDialog } from './components/index';
 import { TableComponent } from '../../components';
-import { trainees } from './Data/Trainee'
+import callApi from '../../libs/utils/api';
+import { trainees } from './Data/Trainee';
 
 const useStyles = (theme) => ({
   root: {
@@ -30,6 +31,9 @@ class TraineeList extends React.Component {
       deleteData: {},
       page: 0,
       rowsPerPage: 10,
+      loading: false,
+      Count: 0,
+      dataObj: [],
     };
   }
 
@@ -43,33 +47,47 @@ class TraineeList extends React.Component {
     return open;
   };
 
-  handleSubmit = () => {
+  handleChangeRowsPerPage = (event) => {
+    this.setState({
+      rowsPerPage: event.target.value,
+      page: 0,
+
+    });
+  };
+
+  handleSubmit = (data, value) => {
     this.setState({
       open: false,
     }, () => {
+      console.log(data);
     });
+    const message = 'This is Success Message';
+    const status = 'success';
+    value(message, status);
   }
 
-  handleSelcet = () => {
+  handleSelect = (event) => {
+    console.log(event);
+  };
 
-  }
-
- handleSort = (field) => () => {
-   const { order } = this.state;
-   this.setState({
-     orderBy: field,
-     order: order === 'asc' ? 'desc' : 'asc',
-   });
- };
+  handleSort = (field) => (event) => {
+    const { order } = this.state;
+    console.log(event);
+    this.setState({
+      orderBy: field,
+      order: order === 'asc' ? 'desc' : 'asc',
+    });
+  };
 
   handleChangePage = (event, newPage) => {
+    this.componentDidMount(newPage);
     this.setState({
       page: newPage,
     });
   };
 
   // eslint-disable-next-line no-unused-vars
-  handleRemoveDialogOpen = (element) => () => {
+  handleRemoveDialogOpen = (element) => (event) => {
     this.setState({
       RemoveOpen: true,
       deleteData: element,
@@ -132,9 +150,32 @@ class TraineeList extends React.Component {
     });
   };
 
+  componentDidMount = () => {
+    this.setState({ loading: true });
+    // eslint-disable-next-line consistent-return
+    callApi({ }, 'get', `/trainee?skip=${0}&limit=${20}`).then((response) => {
+      this.setState({ dataObj: response.data.record, loading: false, Count: 100 });
+
+      if (response.data.status !== 200) {
+        this.setState({
+          loading: false,
+          Count: 100,
+
+        }, () => {
+          console.log('call Api');
+        });
+      } else {
+        this.setState({ dataObj: trainees, loading: false, Count: 100 });
+        return response;
+      }
+    });
+  }
+
   render() {
     const {
-      open, order, orderBy, page, rowsPerPage, EditOpen, RemoveOpen, editData,
+      open, order, orderBy, page,
+      rowsPerPage, EditOpen, RemoveOpen, editData,
+      loading, dataObj, Count,
     } = this.state;
     const { classes } = this.props;
     return (
@@ -160,9 +201,12 @@ class TraineeList extends React.Component {
             onClose={this.handleRemoveClose}
             remove={this.handleRemove}
           />
+          <br />
+          <br />
           <TableComponent
+            loader={loading}
             id="id"
-            data={trainees}
+            data={dataObj}
             column={
               [
                 {
@@ -196,10 +240,11 @@ class TraineeList extends React.Component {
             onSort={this.handleSort}
             orderBy={orderBy}
             order={order}
-            onSelect={this.handleSelcet}
-            count={trainees.length}
+            onSelect={this.handleSelect}
+            count={Count}
             page={page}
             onChangePage={this.handleChangePage}
+            onChangeRowsPerPage={this.handleChangeRowsPerPage}
             rowsPerPage={rowsPerPage}
           />
         </div>

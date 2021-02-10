@@ -11,17 +11,17 @@ import callApi from '../../libs/utils/api';
 import { snackbarContext } from '../../contexts/SnackBarProvider';
 
 const Design = (theme) => ({
-    icon: {
-        background: 'red',
-        marginLeft: theme.spacing(22),
-        marginTop: theme.spacing(3),
-    },
-    main: {
-        width: 400,
-        marginTop: theme.spacing(15),
-        marginLeft: theme.spacing(55),
-    },
-})
+  icon: {
+    background: 'red',
+    marginLeft: theme.spacing(22),
+    marginTop: theme.spacing(3),
+  },
+  main: {
+    width: 400,
+    marginTop: theme.spacing(15),
+    marginLeft: theme.spacing(57),
+  },
+});
 
 class Login extends React.Component {
   constructor(props) {
@@ -44,6 +44,7 @@ class Login extends React.Component {
     if (redirect) {
       return <Redirect to="/trainee" />;
     }
+    return '';
   };
 
   handleChange = (key) => ({ target: { value } }) => {
@@ -69,6 +70,7 @@ class Login extends React.Component {
           return err.message;
         }
       }
+      return '';
     };
 
     isTouched = (field) => {
@@ -87,26 +89,24 @@ class Login extends React.Component {
         disabled: true,
         loader: true,
       });
-      
-    await callApi('POST', '/user/login', { email: email, password })
-    .then((resp) => {
-        localStorage.setItem('token', resp.data.data);
+      const resp = await callApi({ email: email.trim(), password }, 'post', '/user/login/');
+      if (resp.data.data && (resp.data.status === 200)) {
+        window.localStorage.setItem('token', resp.data.data);
         this.setState({
-                  redirect: true,
-                  message: 'Successfully Login',
-                }, () => {
-                  const { message } = this.state;
-                  value(message, 'success');
-                });
-    })
-    .catch(() => {
+          redirect: true,
+          message: 'Successfully Login',
+        }, () => {
+          const { message } = this.state;
+          value(message, 'success');
+        });
+      } else {
         this.setState({
-                  message: 'Email not Registered',
-                }, () => {
-                  const { message } = this.state;
-                  value(message, 'error');
-                });
-    });    
+          message: 'Email not Registered',
+        }, () => {
+          const { message } = this.state;
+          value(message, 'error');
+        });
+      }
     };
 
     render() {
