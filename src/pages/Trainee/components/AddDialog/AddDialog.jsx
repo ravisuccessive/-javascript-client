@@ -8,7 +8,7 @@ import { Email, Person, VisibilityOff } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import schema from './Schema';
 import { snackbarContext } from '../../../../contexts/SnackBarProvider/index';
-import Handler from './Handler';
+import DialogTextfield from './DialogTextfield';
 
 const passwordStyle = () => ({
   passfield: {
@@ -94,7 +94,7 @@ class AddDialog extends React.Component {
     const { Name, Password } = this.state;
     const ans = [];
     Object.keys(constant).forEach((key) => {
-      ans.push(<Handler
+      ans.push(<DialogTextfield
         label={key}
         onChange={this.handleChange(key)}
         onBlur={() => this.isTouched(key)}

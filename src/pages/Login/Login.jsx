@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -12,17 +11,17 @@ import callApi from '../../libs/utils/api';
 import { snackbarContext } from '../../contexts/SnackBarProvider';
 
 const Design = (theme) => ({
-  icon: {
-    background: 'red',
-    marginLeft: theme.spacing(22),
-    marginTop: theme.spacing(3),
-  },
-  main: {
-    width: 400,
-    marginTop: theme.spacing(25),
-    marginLeft: theme.spacing(50),
-  },
-});
+    icon: {
+        background: 'red',
+        marginLeft: theme.spacing(22),
+        marginTop: theme.spacing(3),
+    },
+    main: {
+        width: 400,
+        marginTop: theme.spacing(15),
+        marginLeft: theme.spacing(55),
+    },
+})
 
 class Login extends React.Component {
   constructor(props) {
@@ -88,25 +87,26 @@ class Login extends React.Component {
         disabled: true,
         loader: true,
       });
-      const resp = await callApi('post', '/user/login/', { email: email.trim(), password });
-      console.log('resp', resp);
-      if (resp.data.data && (resp.data.status === 200)) {
-        window.localStorage.setItem('token', resp.data.data);
+      
+    await callApi('POST', '/user/login', { email: email, password })
+    .then((resp) => {
+        localStorage.setItem('token', resp.data.data);
         this.setState({
-          redirect: true,
-          message: 'Successfully Login',
-        }, () => {
-          const { message } = this.state;
-          value(message, 'success');
-        });
-      } else {
+                  redirect: true,
+                  message: 'Successfully Login',
+                }, () => {
+                  const { message } = this.state;
+                  value(message, 'success');
+                });
+    })
+    .catch(() => {
         this.setState({
-          message: 'Email not Registered',
-        }, () => {
-          const { message } = this.state;
-          value(message, 'error');
-        });
-      }
+                  message: 'Email not Registered',
+                }, () => {
+                  const { message } = this.state;
+                  value(message, 'error');
+                });
+    });    
     };
 
     render() {
