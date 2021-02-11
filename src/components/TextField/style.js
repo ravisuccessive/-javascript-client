@@ -12,6 +12,7 @@ padding: 0.7%;
 border: 1px solid gray;
 border-radius: 5px;
 color: solid gray;
+margin-left:8px;
 ${(props) => props.error
 && css`
 border: 1px solid black;
