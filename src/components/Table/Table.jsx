@@ -44,8 +44,8 @@ const TableComponent = (props) => {
   );
 };
 TableComponent.defaultPropsTypes = {
-    data: '',
-    column:'{}'
+    data: [],
+    column:[]
 }
 TableComponent.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
