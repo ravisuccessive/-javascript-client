@@ -74,17 +74,13 @@ function TableComponent(props) {
     </TableContainer>
   );
 }
+TableComponent.defaultPropsTypes = {
+    data: [],
+    column:[]
+    }
 TableComponent.propTypes = {
-  classes: PropTypes.objectOf(PropTypes.string).isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  column: PropTypes.arrayOf(PropTypes.object).isRequired,
-  order: PropTypes.string,
-  orderBy: PropTypes.string,
-  onSort: PropTypes.func,
-};
-TableComponent.defaultProps = {
-  order: 'asc',
-  orderBy: '',
-  onSort: () => {},
+classes: PropTypes.objectOf(PropTypes.string).isRequired,
+data: PropTypes.arrayOf(PropTypes.any).isRequired,
+column: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 export default withStyles(useStyles)(TableComponent);
